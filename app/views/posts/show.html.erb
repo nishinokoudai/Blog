@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+    <head>
+        <div class="jumbotron">
+          <center>
+            <h1><a href="http://localhost:3000/posts" ><span class="glyphicon glyphicon-home"></span> TaBlog </a></h1>  
+            <a href="http://localhost:3000/posts/new" class="right btn btn-primary .active" role="button"><span class="glyphicon glyphicon-pencil"></span> 投稿する</a>
+            <a href="http://localhost:3000/signup" class="right btn btn-primary .active" role="button"><span class="glyphicon glyphicon-user"></span> 書く人の追加</a>
+            <a href="http://localhost:3000/users/" class="right btn btn-primary .active" role="button"><span class="glyphicon glyphicon-user"></span> 一覧</a>
+          </center>
+        </div>
+    </head>
+
+
+     <h2> 投稿しました！ </h2>
+
+
+    <div class="jumbotron">
+      <center>
+        	<p>
+        	  <strong>タイトル：</strong>
+        	  <%= @post.title %>
+        	</p>
+        	 
+        	<p>
+        	  <strong>内容：</strong>
+        	  <%= @post.text %>
+        	</p>
+
+          <p>
+            <strong>写真 :</strong>
+          <%= image_tag @post.image_url %>
+          </p>
+  	  </center>
+    </div>
+
+    <h2><a href="http://localhost:3000/posts" ><span class="glyphicon glyphicon-home"></span> ホームへ </a></h2>  
+
+</html>

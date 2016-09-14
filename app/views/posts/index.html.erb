@@ -1,0 +1,42 @@
+<!doctype html>
+<html　lang="ja">
+  <head>
+    <div class="jumbotron">
+          <center>
+          <h1><a href="http://localhost:3000/posts" ><span class="glyphicon glyphicon-home"></span> TaBlog </a></h1>  
+          <a href="http://localhost:3000/posts/new" class="right btn btn-primary .active" role="button"><span class="glyphicon glyphicon-pencil"></span> 投稿する</a>
+          <a href="http://localhost:3000/signup" class="right btn btn-primary .active" role="button"><span class="glyphicon glyphicon-user"></span> 書く人の追加</a>
+          <a href="http://localhost:3000/users/" class="right btn btn-primary .active" role="button"><span class="glyphicon glyphicon-user"></span> 一覧</a>
+          </center>
+      </div>  
+  </head>
+
+        <h2><span class="glyphicon glyphicon-home"></span> ホーム
+        （投稿の編集）</h2>
+
+    <div class="jumbotron">
+         <center>     
+              <% @posts.each do |post| %>
+                <p>
+                <strong>タイトル：</strong>
+                  <%= post.title %>
+                </p>
+                <p>
+                  <%= image_tag post.image_url %>
+                </p>
+                <p>
+                <strong>内容：</strong>
+                  <%= post.text %>
+                </p>
+                
+                  <a><%= link_to '編集', edit_post_path(post) %></a>
+                  <a><%= link_to '削除', post_path(post),
+                            method: :delete, data: { confirm: '削除しますか？' } %></a>
+                <p>           
+                ----------------------------------------------------------------------------
+                </p>   
+              <% end %>
+         </center>
+      </div>
+    </div>
+</html>
