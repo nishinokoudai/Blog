@@ -10,32 +10,48 @@
           </center>
       </div>  
   </head>
-       <center>
-        <h4><span class="glyphicon glyphicon-home"></span> ホーム
-        （投稿の編集）</h4>
-       </center>
+
+        <h2><span class="glyphicon glyphicon-home"></span> ホーム
+        （投稿の編集）</h2>
 
 
-       <center>     
-            <% @posts.each do |post| %>
-            <div class="well well-lg">
-                <p>
-                  <%= image_tag post.image_url %>
-                </p>
-                <p>
+        <div class="col-xs-1">
+    </div>
+    <div class="col-md-6">
+          <% @posts.each do |post| %>
+              <div class="panel panel-default">
+                <div class="panel-heading">
                 <strong><%= post.title %></strong>
-                </p>
+                </div>
+                <div class="panel-body">
+                <center>
+                  <%= image_tag post.image_url %>
+                
                 <p>
                   <%= post.text %>
                 </p>
-                
-                  <a><%= link_to '編集', edit_post_path(post) %></a>
-                  <a><%= link_to '削除', post_path(post),
-                            method: :delete, data: { confirm: '削除しますか？' } %></a>
+                </center>
+                <div class="text-right">               
+                    <a><%= link_to '編集', edit_post_path(post) %></a>
+
+                    <a><%= link_to '削除', post_path(post),
+                                method: :delete, data: { confirm: '削除しますか？' } %></a>
                 </div>
-                
-              <% end %>
-         </center>
+                </div>
+              </div>   
+          <% end %>
       </div>
-    </div>
+
+      <div class="col-xs-1"></div>
+
+      <div class="col-xs-2">
+          <div class="well-sm">   
+          <strong><center>Link</center></strong>
+          <li></li>
+          <li></li>
+          <li></li>
+          </div>
+      </div>
+
+    <div class="col-xs-2"></div>    
 </html>
