@@ -14,27 +14,26 @@
         <h4><span class="glyphicon glyphicon-home"></span> ホーム
         （投稿の編集）</h4>
        </center>
-    <div class="jumbotron">
-         <center>     
-              <% @posts.each do |post| %>
-                <p>
-                <strong>タイトル：</strong>
-                  <%= post.title %>
-                </p>
+
+
+       <center>     
+            <% @posts.each do |post| %>
+            <div class="well well-lg">
                 <p>
                   <%= image_tag post.image_url %>
                 </p>
                 <p>
-                <strong>内容：</strong>
+                <strong><%= post.title %></strong>
+                </p>
+                <p>
                   <%= post.text %>
                 </p>
                 
                   <a><%= link_to '編集', edit_post_path(post) %></a>
                   <a><%= link_to '削除', post_path(post),
                             method: :delete, data: { confirm: '削除しますか？' } %></a>
-                <p>           
-                ----------------------------------------------------------------------------
-                </p>   
+                </div>
+                
               <% end %>
          </center>
       </div>
