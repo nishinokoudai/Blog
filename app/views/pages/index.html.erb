@@ -9,23 +9,25 @@
           </center>
         </div>
     </head>
-
-
-    <div>
-      <h2>全ての投稿一覧</h2>
-
-        <table class="jumbotron table table-striped">
-          <tr>
-            <th>タイトル</th>
-            <th>内容</th>
-          </tr>
-
-          <% @posts.each do |post| %>
-            <tr>
-              <td><%= post.title %></td>
-              <td><%= post.text %></td>
-            </tr>
-          <% end %>
-        </table>
-    </div>
+    
+         <center>     
+              <% @posts.each do |post| %>
+              <div class="well well-lg">
+                <p>
+                  <%= image_tag post.image_url %>
+                </p>
+                <p>
+                <strong><%= post.title %></strong>
+                </p>
+                <p>
+                <strong>内容：</strong>
+                  <%= post.text %>
+                </p>
+                </div>
+                <p>           
+                ----------------------------------------------------------------------------
+                </p>   
+              <% end %>
+         </center>
+      </div>
 </html>
