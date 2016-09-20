@@ -34,6 +34,51 @@
   	  </center>
     </div>
 
+    <h2>Comments</h2>
+<%# 順序無しリスト %>
+<ul>
+  <%# コメントがあったら %>
+  <% if @post.comments.any? %>
+    <%# コメント数ループ %>
+    <% @post.comments.each do |comment| %>
+      <%# リストの内容 %>
+      <li>
+        <%# コメント本文 (by コメンター) %>
+        <%= comment.body %> (by <%= comment.commenter %>)
+      </li>
+    <% end %>
+  <%# コメントが無かったら %>
+  <% else %>
+    <%# no comment yet. %>
+    <li>no comment yet.</li>
+  <% end %>
+</ul>
+
+<h2>Add a comment</h2>
+
+<%# @postに対するコメントフォーム %>
+<%= form_for([@post, @comment]) do |f| %>
+
+    <%# commenterに対するテキストフィールド %>
+    <div class = "field">
+        <%# commenterに対するテキストフィールド %>
+        <%= f.label :commenter %>
+        <%= f.text_field :commenter %>
+    </div>
+
+    <%# bodyに対するテキストエリア（５行分） %>
+    <div class = "field">
+        <%= f.label :body %>
+        <%= f.text_area :body, :rows => 5 %>
+    </div>
+
+    <%# 送信ボタン（createメソッドへ） %>
+    <div class = "actions">
+        <%= f.submit %>
+    </div>
+
+<% end %>
+
     <h2><a href="http://localhost:3000/posts" ><span class="glyphicon glyphicon-home"></span> ホームへ </a></h2>  
 
 </html>

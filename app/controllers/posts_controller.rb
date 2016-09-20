@@ -7,7 +7,7 @@ class PostsController < ApplicationController
 	  end  
 
 	  def index
-	     @posts = Post.all
+	     @posts = Post.all.order(created_at: :desc)
 	  end
     
       def new
@@ -25,7 +25,8 @@ class PostsController < ApplicationController
 	  end
 
 	  def show
-	        @post = Post.find(params[:id])
+	     @post = Post.find(params[:id])
+       @comment = Post.find(params[:id]).comments.build
     end
       
       

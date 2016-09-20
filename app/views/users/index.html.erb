@@ -3,7 +3,7 @@
     <head>
         <div class="jumbotron">
          <center>
-            <h1><a href="http://localhost:3000/posts" ><span class="glyphicon glyphicon-home"></span> TaBlog </a></h1>  
+            <h1><a href="http://localhost:3000/posts" ><span class="glyphicon glyphicon-home"></span> Blog </a></h1>  
             <a href="http://localhost:3000/posts/new" class="right btn btn-primary .active" role="button"><span class="glyphicon glyphicon-pencil"></span> 投稿する</a>
             <a href="http://localhost:3000/signup" class="right btn btn-primary .active" role="button"><span class="glyphicon glyphicon-user"></span> 書く人の追加</a>
             <a href="http://localhost:3000/users/" class="right btn btn-primary .active" disabled="disabled" role="button"><span class="glyphicon glyphicon-user"></span> 一覧</a>
@@ -12,13 +12,14 @@
     </head>
 
     <% provide(:title, 'All users') %>
-    <h2>書き手の一覧</h2>
+    <h2><span class="glyphicon glyphicon-user"></span> 書き手の一覧</h2>
 
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <table class="table table-striped">
           <tr>
              <th>名前</th>
+             <th>登録日時</th>
              <th>メールアドレス</th>
           </tr>
           
@@ -26,6 +27,7 @@
           <tr>
             <td><%= gravatar_for user, size: 50 %>
             　　　<%= link_to user.name, user %></td>
+            <td><%= user.created_at.strftime("%Y年%m月%d日 %H時%M分")%></td>
             <td><%= link_to user.email, user %></td>
           </tr>
           

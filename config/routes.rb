@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get 'sessions/new'
 
   resources :posts
+ 
+ # postレコードに関連づけられたComment機能のルーティング
+  resources :comments
   
   get    'signup'  => 'users#new'
   
