@@ -15,7 +15,7 @@
         （投稿の編集）</h2>
 
 
-    <div class="col-xs-1">
+    <div class="col-xs-3">
     </div>
     <div class="col-md-6">
           <% @posts.each do |post| %>
@@ -28,8 +28,10 @@
                     <a><%= link_to '編集', edit_post_path(post) %></a>
 
                     <a><%= link_to '削除', post_path(post),
-                                method: :delete, data: { confirm: '削除しますか？' } %>                                  
-                     </a>
+                                method: :delete, data: { confirm: '削除しますか？' } %> </a>
+                <a>
+                 <%= link_to "コメント", post_path(post) %> (<%= post.comments.size %>)
+                </a>
                 </div>
                 <div class="panel-body">
                 <center>
@@ -44,35 +46,6 @@
           <% end %>
       </div>
 
-
-    <h2>コメント</h2> 
-      <% @post.comments.each do |comment| %> 
-      <p> 
-      <b>Commenter:</b> 
-      <%= comment.commenter %> 
-      </p> 
-
-      <p> 
-      <b>Comment:</b> 
-      <%= comment.body %> 
-      </p> 
-    <% end %> 
-
-    <h2>コメントをかく:</h2> 
-      <%= form_for([@post, @post.comments.build]) do |f| %> 
-      <div class="field"> 
-      <%= f.label :commenter %><br /> 
-      <%= f.text_field :commenter %> 
-      </div> 
-      <div class="field"> 
-      <%= f.label :body %><br /> 
-      <%= f.text_area :body %> 
-      </div> 
-      <div class="actions"> 
-      <%= f.submit %> 
-      </div> 
-    <% end %> 
-      <br />   
-
+      
 </html>
      

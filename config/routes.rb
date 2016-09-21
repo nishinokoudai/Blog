@@ -4,10 +4,12 @@ Rails.application.routes.draw do
   
   get 'sessions/new'
 
-  resources :posts
+  resources :posts do
  
  # postレコードに関連づけられたComment機能のルーティング
   resources :comments
+  
+  end
   
   get    'signup'  => 'users#new'
   

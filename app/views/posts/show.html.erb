@@ -12,73 +12,81 @@
     </head>
 
 
-     <h2> 投稿しました！ </h2>
-
-
-    <div class="jumbotron">
-      <center>
-        	<p>
-        	  <strong>タイトル：</strong>
-        	  <%= @post.title %>
-        	</p>
-        	 
-        	<p>
-        	  <strong>内容：</strong>
-        	  <%= @post.text %>
-        	</p>
-
-          <p>
-            <strong>写真 :</strong>
-          <%= image_tag @post.image_url %>
-          </p>
-  	  </center>
-    </div>
-
-    <h2>Comments</h2>
-<%# 順序無しリスト %>
-<ul>
-  <%# コメントがあったら %>
-  <% if @post.comments.any? %>
-    <%# コメント数ループ %>
-    <% @post.comments.each do |comment| %>
-      <%# リストの内容 %>
-      <li>
-        <%# コメント本文 (by コメンター) %>
-        <%= comment.body %> (by <%= comment.commenter %>)
-      </li>
-    <% end %>
-  <%# コメントが無かったら %>
-  <% else %>
-    <%# no comment yet. %>
-    <li>no comment yet.</li>
-  <% end %>
-</ul>
-
-<h2>Add a comment</h2>
-
-<%# @postに対するコメントフォーム %>
-<%= form_for([@post, @comment]) do |f| %>
-
-    <%# commenterに対するテキストフィールド %>
-    <div class = "field">
-        <%# commenterに対するテキストフィールド %>
-        <%= f.label :commenter %>
-        <%= f.text_field :commenter %>
-    </div>
-
-    <%# bodyに対するテキストエリア（５行分） %>
-    <div class = "field">
-        <%= f.label :body %>
-        <%= f.text_area :body, :rows => 5 %>
-    </div>
-
-    <%# 送信ボタン（createメソッドへ） %>
-    <div class = "actions">
-        <%= f.submit %>
-    </div>
-
-<% end %>
-
     <h2><a href="http://localhost:3000/posts" ><span class="glyphicon glyphicon-home"></span> ホームへ </a></h2>  
+
+
+
+<div class="col-xs-1"></div>
+<div class="col-md-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        <strong><%= @post.title %></strong>
+        （<%= @post.created_at.strftime("%Y年%m月%d日 %H時%M分")%>）
+        </div>
+    
+        <div class="panel-body">    	 
+          <center>
+            <%= image_tag @post.image_url %>
+                    
+            <p>
+            <%= @post.text %>
+            </p>
+          </center>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6">
+
+
+    <h2><span class="glyphicon glyphicon-book"></span> コメント</h2>
+<%# 順序無しリスト %>
+    <center>
+        <ul>
+          <%# コメントがあったら %>
+          <% if @post.comments.any? %>
+            <%# コメント数ループ %>
+            <% @post.comments.each do |comment| %>
+              <%# リストの内容 %>
+              <li>
+                <%# コメント本文 (by コメンター) %>
+                <%= comment.body %> (by <%= comment.commenter %>)
+              </li>
+            <% end %>
+          <%# コメントが無かったら %>
+          <% else %>
+            <%# no comment yet. %>
+            <p>まだコメントはありません</p>
+          <% end %>
+        </ul>
+    </center>
+
+    <h2><span class="glyphicon glyphicon-pencil"></span> コメントを書く</h2>
+    <center>
+    <%= form_for([@post, @comment]) do |f| %>
+        <% if @comment.errors.any? %>
+            <ul>
+                <% @comment.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        <% end %>
+
+        <div class = "field">
+            <p><%= f.label :コメンテーター %></p>
+            <%= f.text_field :commenter %>
+        </div>
+
+        <div class = "field">
+            <p><%= f.label :内容 %></p>
+            <%= f.text_area :body, :rows => 5 %>
+        </div>
+
+        <div class = "actions">
+            <%= f.submit %>
+        </div>
+    <% end %>
+    </center>
+</div>
 
 </html>
