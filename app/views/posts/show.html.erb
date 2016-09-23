@@ -36,22 +36,16 @@
 
 
     <h2><span class="glyphicon glyphicon-book"></span> コメント</h2>
-<%# 順序無しリスト %>
+
     <center>
         <ul>
-          <%# コメントがあったら %>
           <% if @post.comments.any? %>
-            <%# コメント数ループ %>
             <% @post.comments.each do |comment| %>
-              <%# リストの内容 %>
               <li>
-                <%# コメント本文 (by コメンター) %>
                 <%= comment.body %> (by <%= comment.commenter %>)
               </li>
             <% end %>
-          <%# コメントが無かったら %>
           <% else %>
-            <%# no comment yet. %>
             <p>まだコメントはありません</p>
           <% end %>
         </ul>
@@ -69,12 +63,12 @@
         <% end %>
 
         <div class = "field">
-            <p><%= f.label :コメンテーター %></p>
+            <p><%= f.label :書き手 %></p>
             <%= f.text_field :commenter %>
         </div>
 
         <div class = "field">
-            <p><%= f.label :内容 %></p>
+            <p><%= f.label :コメント %></p>
             <%= f.text_area :body, :rows => 5 %>
         </div>
 

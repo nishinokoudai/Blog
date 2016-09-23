@@ -6,7 +6,6 @@ Rails.application.routes.draw do
 
   resources :posts do
  
- # postレコードに関連づけられたComment機能のルーティング
   resources :comments
   
   end
