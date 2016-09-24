@@ -12,7 +12,7 @@
         </div>
     </head>
 
-<div class="col-xs-1"></div>
+<div class="col-xs-2"></div>
 <div class="col-md-4">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -28,55 +28,67 @@
             <%= @post.text %>
             </p>
           </center>
-        </div>
-    </div>
-</div>
 
-<div class="col-md-6">
-
-
-    <h2><span class="glyphicon glyphicon-book"></span> コメント</h2>
-
-    <center>
-        <ul>
+          <p>
+          <span class="glyphicon glyphicon-book"></span> コメント </p>
+          <ul>
           <% if @post.comments.any? %>
             <% @post.comments.each do |comment| %>
               <li>
                 <%= comment.body %> (by <%= comment.commenter %>)
+
+                <!--
+                <%= link_to "削除", [comment.post, comment],
+                        :confirm => "本当に削除してもよろしいですか?",
+                        :method => :delete,
+                        :remote => true %>
+                -->
+
               </li>
             <% end %>
           <% else %>
             <p>まだコメントはありません</p>
           <% end %>
         </ul>
-    </center>
-
-    <h2><span class="glyphicon glyphicon-pencil"></span> コメントを書く</h2>
-    <center>
-    <%= form_for([@post, @comment]) do |f| %>
-        <% if @comment.errors.any? %>
-            <ul>
-                <% @comment.errors.full_messages.each do |msg| %>
-                    <li><%= msg %></li>
-                <% end %>
-            </ul>
-        <% end %>
-
-        <div class = "field">
-            <p><%= f.label :書き手 %></p>
-            <%= f.text_field :commenter %>
         </div>
-
-        <div class = "field">
-            <p><%= f.label :コメント %></p>
-            <%= f.text_area :body, :rows => 5 %>
-        </div>
-
-        <div class = "actions">
-            <%= f.submit %>
-        </div>
-    <% end %>
-    </center>
+    </div>
 </div>
 
+<div class="col-md-4">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+        <center>
+        <span class="glyphicon glyphicon-pencil"></span> コメントを書く
+        </center>
+        </div>
+        <div class="panel-body">
+        <center>
+        <%= form_for([@post, @comment]) do |f| %>
+            <% if @comment.errors.any? %>
+                <ul>
+                    <% @comment.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li>
+                    <% end %>
+                </ul>
+            <% end %>
+
+            <div class = "field">
+                <p><%= f.label :書き手 %></p>
+                <%= f.text_field :commenter, :size=>"40" %>
+            </div>
+
+            <div class = "field">
+                <p><%= f.label :コメント %></p>
+                <%= f.text_area :body, :size=>"50x10"%>
+            </div>
+
+            <div class = "actions">
+                <%= f.submit :投稿する %>
+            </div>
+        <% end %>
+        </center>
+        </div>
+    </div>
+
 </html>
+
