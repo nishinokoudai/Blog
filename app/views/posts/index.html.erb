@@ -12,24 +12,12 @@
       </div>  
   </head>
 
-        <h2><span class="glyphicon glyphicon-home"></span> ホーム
-        （投稿の編集）</h2>
+        <center>
+        <%= paginate @posts %>
+        </center>
 
 
-    <div class="col-xs-3">
-     <!--
-          <% @posts.each do |post| %>
-              <div class="panel panel-default">
-                <center>
-                <strong><%= link_to post.title, post_path(post) %></strong>
-                </center>
-                （<%= post.created_at.strftime("%Y年%m月%d日 %H時%M分")%>）
-                 <a>
-                 <%= link_to "コメント", post_path(post) %> (<%= post.comments.size %>)</a>
-              </div>   
-          <% end %>
-     -->     
-    </div>
+    <div class="col-xs-3"></div>
 
     <div class="col-md-6">
           <% @posts.each do |post| %>
@@ -37,32 +25,57 @@
                   
                   <div class="panel-heading">
                       <strong><%= post.title %></strong>
+                        <div class="text-right">
+                          <%= link_to edit_post_path(post) do%>
+                          <i class="glyphicon glyphicon-file"></i>編集
+                          <% end %>
 
-                      （<%= post.created_at.strftime("%Y年%m月%d日 %H時%M分")%>）
-                   
-                          <a><%= link_to '編集', edit_post_path(post) %></a>
-
-                          <a><%= link_to '削除', post_path(post),
-                                      method: :delete, data: { confirm: '削除しますか？' } %> </a>
-                          
-                          <a><%= link_to "コメント", post_path(post) %> (<%= post.comments.size %>)</a>
+                          <%= link_to post_path(post),
+                                      method: :delete, data: { confirm: '削除しますか？' } do%> 
+                          <i class="glyphicon glyphicon-trash"></i>削除
+                          <% end %>
+                        </div>  
                   </div>
                   
                   <div class="panel-body">
                       <center>
-                      
-                        <!-- 投稿部分 -->
-
-                        <%= image_tag post.image_url %>
-                        
-                        <p>
-                          <%= post.text %>
-                        </p>
-                        
+                        <% if post.image? %>
+                              <%= image_tag post.image.url %>    
+                        <% end %>
+                         
+                       <div class="well-s"> 
+                          <p><%= post.text %></p>
+                       </div>
                       </center>
+                     
+                    <div class="text-right">
+                     （<%= post.created_at.strftime("%Y年%m月%d日 %H時%M分")%>）
+                    </div>
+                  
+                </div>
+              </div>
+                    <% if post.comments.any? %>
+               <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <strong><span class="glyphicon glyphicon-pencil"></span> コメント</strong>
+
+                    <div class="text-right">
+                    <%= link_to post_path(post) do%>
+                          <i class="glyphicon glyphicon-pencil"></i>コメント
+                     </div>
+                     <% end %>
                   </div>
 
-                </div>   
+                  <div class="panel-body">
+                      <% post.comments.each do |comment| %>
+                      <li>
+                         <%= comment.body %> (by <%= comment.commenter %>)
+                      </li>
+                    <% end %> 
+                    <% end %>
+                  </div>  
+                 </div>
+                </div>    
             <% end %>
     </div>     
 

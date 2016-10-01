@@ -7,10 +7,10 @@ class PostsController < ApplicationController
 	  end  
 
 	  def index
-	     @posts = Post.all.order(created_at: :desc)
+	     @posts = Post.all.order(created_at: :desc).page(params[:page])
 	  end
     
-    def new
+      def new
 	     @post = Post.new
 	  end
     
@@ -26,7 +26,7 @@ class PostsController < ApplicationController
 
 	  def show
 	     @post = Post.find(params[:id])
-         @comment = Post.find(params[:id]).comments.build
+       @comment = Post.find(params[:id]).comments.build
     end
       
       
@@ -47,6 +47,6 @@ class PostsController < ApplicationController
     private
 
 	  def post_params
-	      params.require(:post).permit(:title, :text, :image, :comment)
+	      params.require(:post).permit(:title, :text, :image, :image_cache, :remove_image, :comment)
 	  end
 end

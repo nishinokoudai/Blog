@@ -22,15 +22,17 @@
     
         <div class="panel-body">    	 
           <center>
-            <%= image_tag @post.image_url %>
-                    
+           <% if @post.image? %>
+            <%= image_tag @post.image.url %>
+           <% end %>
+
             <p>
             <%= @post.text %>
             </p>
           </center>
 
           <p>
-          <span class="glyphicon glyphicon-book"></span> コメント </p>
+          <span class="glyphicon glyphicon-pencil"></span> コメント </p>
           <ul>
           <% if @post.comments.any? %>
             <% @post.comments.each do |comment| %>

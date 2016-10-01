@@ -1,42 +1,64 @@
 <!doctype html>
 <html>
-  <div class="jumbotron">
-      <center>
-        <h1><span class="glyphicon glyphicon-home"></span> Blog </h1>
-
-         <a href="http://localhost:3000/login" class="btn btn-primary btn-lg .active" role="button">ログイン</a>
-      </center>
-  </div>
-
-  <h2> <span class="glyphicon glyphicon-pencil"></span> 投稿</h2>
- 
- 
- <div class="col-xs-3"></div>
-    <div class="col-md-6">
-    
-              <% @posts.each do |post| %>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                <strong><%= post.title %></strong>
-           
-                （<%= post.created_at.strftime("%Y年%m月%d日 %H時%M分")%>）
-
-                 <strong>コメント（<%= post.comments.size %>）</strong>
-                
-                </div>
-                <div class="panel-body">
-                <center>
-                  <%= image_tag post.image_url %>
-                
-                <p>
-                  <%= post.text %>
-                </p>
-
-                </center>
-                </div>
-              </div>  
-              <% end %>
-            
+   <header>
+    <div class="jumbotron">
+          <center>
+          <h1><span class="glyphicon glyphicon-home"></span> Blog </h1>  
+          <a href="http://localhost:3000/login" class="right btn btn-primary .active" role="button"> ログイン</a>
+          </center>
     </div>
+   </header>
+ 
+        <center>
+        <%= paginate @posts %>
+        </center>
 
+  <div class="col-xs-3"></div>
+
+    <div class="col-md-6">
+          <% @posts.each do |post| %>
+              <div class="panel panel-primary">
+                  
+                  <div class="panel-heading">
+                      <strong><%= post.title %></strong>
+
+                      （<%= post.created_at.strftime("%Y年%m月%d日 %H時%M分")%>）
+                          
+                        <%= "コメント" %> (<%= post.comments.size %>)
+                  </div>
+                  
+                  <div class="panel-body">
+                      <center>
+                        <% if post.image? %>
+                              <%= image_tag post.image.url %>    
+                        <% end %>
+                         
+                       <div class="well-s"> 
+                          <p><%= post.text %></p>
+                       </div>
+                      </center>
+                   </div>   
+                </div>
+
+
+                    <% if post.comments.any? %>
+              <div class="panel panel-info">
+                    
+                    <div class="panel-heading">
+                    <strong><span class="glyphicon glyphicon-pencil"></span> コメント</strong>
+                    </div>
+
+                    <div class="panel-body">
+                      <% post.comments.each do |comment| %>
+                      <li>
+                         <%= comment.body %> (by <%= comment.commenter %>)
+                      </li>
+                    <% end %> 
+                    </div>
+                    <% end %>
+                 </div>
+                </div>   
+            <% end %>
+
+    </div>  
 </html>
