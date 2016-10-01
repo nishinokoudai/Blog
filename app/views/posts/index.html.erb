@@ -21,7 +21,7 @@
 
     <div class="col-md-6">
           <% @posts.each do |post| %>
-              <div class="panel panel-default">
+              <div class="panel panel-info">
                   
                   <div class="panel-heading">
                       <strong><%= post.title %></strong>
@@ -55,7 +55,7 @@
                 </div>
               </div>
                     <% if post.comments.any? %>
-               <div class="panel panel-default">
+               <div class="panel panel-info">
                   <div class="panel-heading">
                     <strong><span class="glyphicon glyphicon-pencil"></span> コメント</strong>
 
