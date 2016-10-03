@@ -4,7 +4,7 @@
     <div class="jumbotron">
           <center>
           <h1><span class="glyphicon glyphicon-home"></span> Blog </h1>  
-          <a href="http://localhost:3000/login" class="right btn btn-primary .active" role="button"> ログイン</a>
+          <a href="http://localhost:3000/login" class="right btn btn-primary .active" role="button"> login</a>
           </center>
     </div>
    </header>
@@ -37,28 +37,18 @@
                           <p><%= post.text %></p>
                        </div>
                       </center>
-                   </div>   
-                </div>
+                      
+                      <strong><span class="glyphicon glyphicon-pencil"></span> コメント</strong>
 
-
-                    <% if post.comments.any? %>
-              <div class="panel panel-info">
-                    
-                    <div class="panel-heading">
-                    <strong><span class="glyphicon glyphicon-pencil"></span> コメント</strong>
-                    </div>
-
-                    <div class="panel-body">
                       <% post.comments.each do |comment| %>
                       <li>
                          <%= comment.body %> (by <%= comment.commenter %>)
                       </li>
                     <% end %> 
-                    </div>
-                    <% end %>
-                 </div>
-                </div>   
-            <% end %>
 
+                   </div>   
+                </div>
+            <% end %>
+         </div>  
     </div>  
 </html>
