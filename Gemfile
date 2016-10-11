@@ -33,6 +33,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 gem 'carrierwave'
+gem "rmagick", "~>2.13.2", :require => 'RMagick'
 
 gem 'kaminari'
 

@@ -10,6 +10,14 @@ Rails.application.routes.draw do
   
   end
   
+  namespace :admin do
+      resources :users do
+          collection do
+              post :import
+          end
+      end
+  end
+  
   get    'signup'  => 'users#new'
   
   get    'login'   => 'sessions#new'

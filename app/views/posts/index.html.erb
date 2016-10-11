@@ -21,11 +21,7 @@
 
     <div class="col-md-6">
           <% @posts.each do |post| %>
-              <div class="panel panel-info">
-                  
-                  <div class="panel-heading">
-                      <strong><%= post.title %>　（<%= post.created_at.strftime("%Y年%m月%d日 %H時%M分")%>）</strong>
-                        <div class="text-right">
+                       <div class="text-right">
                           <%= link_to edit_post_path(post) do%>
                           <i class="glyphicon glyphicon-file"></i>
                           <% end %>
@@ -34,28 +30,21 @@
                                       method: :delete, data: { confirm: '削除しますか？' } do%> 
                           <i class="glyphicon glyphicon-trash"></i>
                           <% end %>
+                        </div>
+
+
+              <div class="panel panel-info">
+                  <div class="panel-heading">
+                      <%= post.created_at.strftime("%Y年%m月%d日 %H時%M分")%>
+                      <strong><%= link_to post_path(post) do%>
+                          『<%= post.title %>』 
                           
-                          <%= link_to post_path(post) do%>
-                          <i class="glyphicon glyphicon-pencil"></i>コメ
-                          <% end %>
-                    
-                        </div>  
+                          <span class="badge"><span class="glyphicon glyphicon-pencil"></span> <%= post.comments.size %></span>
+                          <% end %></strong>  
                   </div>
-                  
-                  <div class="panel-body">
-                      <center>
-                        <% if post.image? %>
-                              <%= image_tag post.image.url %>    
-                        <% end %>
-                         
-                       <div class="well-s"> 
-                          <p><%= post.text %></p>
-                       </div>
-                      </center>
-                   
-                  
-                </div>
               </div>
+
+
             <% end %>
     </div>     
 

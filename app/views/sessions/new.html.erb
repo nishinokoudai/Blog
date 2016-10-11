@@ -17,13 +17,13 @@
       <div class="col-md-6 col-md-offset-3">
         <%= form_for(:session, url: login_path) do |f| %>
 
-          <%= f.label :email, "メールアドレス" %>
+          <%= f.label :email, "mailaddress" %>
           <%= f.email_field :email, class: 'form-control' %><br>
 
-          <%= f.label :password, "パスワード" %>
+          <%= f.label :password, "password" %>
           <%= f.password_field :password, class: 'form-control' %><br>
 
-          <%= f.submit "ログイン", class: "btn btn-primary" %>
+          <%= f.submit "login", class: "btn btn-primary" %>
         <% end %>
       </div>
   </div>

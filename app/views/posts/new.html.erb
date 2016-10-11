@@ -13,8 +13,6 @@
     </head>
   
 
-  <h2> <span class="glyphicon glyphicon-pencil"></span> 新しい投稿を書く </h2>
-
 <%= form_for :post, url: posts_path do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
@@ -32,9 +30,19 @@
   <% end %>
 
 <body>
-    <div class="row jumbotron">
-        <div class="col-md-6 col-md-offset-3">
+<div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-info">
+      <div class="panel panel-heading">
+        <span class="glyphicon glyphicon-pencil"></span> 新しい投稿を書く
+      </div>
         　 <%= form_for :post, url: posts_path do |f| %>
+       
+      <div class="panel-body">
+          <p>
+           <%= f.label :image, "写真を投稿" %><br>
+           <%= f.file_field :image %>
+          </p>
+
           <p>
             <%= f.label :title, "タイトル" %><br>
             <%= f.text_field :title %>
@@ -42,18 +50,14 @@
 
           <p>
             <%= f.label :text, "内容" %><br>
-            <%= f.text_area :text, cols: 50, rows: 8 %>
+            <%= f.text_area :text, cols: 80, rows: 15 %>
           </p> 
-
-          <p>
-           <%= f.label :image, "写真を投稿" %><br>
-           <%= f.file_field :image %>
-          </p>
           
           <p> 
             <%= f.submit :投稿する%>
           </p>
-          <% end %>  
+          <% end %> 
+       </div>     
       </div>
     </div>
 </body>

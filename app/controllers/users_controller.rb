@@ -8,6 +8,11 @@ class UsersController < ApplicationController
 
     def index
         @users = User.all
+        respond_to do |format|
+            format.csv do
+                send_data render_to_string, filename: "hoge.csv", type: :csv
+        end
+        end
     end
     
     def new
@@ -36,6 +41,15 @@ class UsersController < ApplicationController
           redirect_to @user
         else
           render 'edit'
+        end
+    end
+    
+    def import
+        if params[:csv_file].blank?
+            redirect_to(admin_users_url, alert: 'インポートするCSVファイルを選択してください')
+            else
+            num = Admin::User.import(params[:csv_file])
+            redirect_to(admin_users_url, notice: "#{num.to_s}件のユーザー情報を追加 / 更新しました")
         end
     end
 
